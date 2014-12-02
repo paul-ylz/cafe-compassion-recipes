@@ -3,6 +3,7 @@ require 'time'
 
 class GithubHook < Sinatra::Base
   def self.parse_git
+    # this git command will only work with at least 2 commits in history
     sha1, date = `git log HEAD~1..HEAD --pretty=format:%h^%ci`.strip.split('^')
     set :commit_hash, sha1
     set :commit_date, Time.parse(date)
